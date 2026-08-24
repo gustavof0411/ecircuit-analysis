@@ -16,24 +16,32 @@ res1.connectNegTerminal(node1, "t")
 node2 = Node()
 res1.connectPosTerminal(node2, "b")
 
-res2.connectNegTerminal(node2, "l")
+res2.connectNegTerminal(node2, "r")
 
-res2.connectPosTerminal(node1, "r")
+node3 = Node()
+wire1 = Wire()
 
+res2.connectPosTerminal(node3, "l")
+
+wire1.connectStartTerminal(node3, "b")
+
+
+node4 = Node()
+
+wire1.connectEndTerminal(node4, "t")
+node1.connectElementR(node4)
+
+ground = Ground()
+ground.connectNodeToBottom(node1)
+
+print("Node 1")
 node1.printNodeScheme()
+
+print("Node 2")
 node2.printNodeScheme()
 
+print("Node 3")
+node3.printNodeScheme()
 
-def checkClosedLoop(node: Node):
-    if (node.elementT != None):
-        checkClosedLoop(node.elementT)
-    if (node.elementR != None):
-        checkClosedLoop(node.elementR)
-    if (node.elementB != None):
-        checkClosedLoop(node.elementB)
-    if (node.elementL != None):
-        checkClosedLoop(node.elementL)
-
-    if (node.elementB == Ground):
-        print("closed")
-
+print("Node 4")
+node4.printNodeScheme()

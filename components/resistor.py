@@ -3,7 +3,7 @@ from util.node import Node
 import itertools
 
 class Resistor:
-    id_iter = itertools.count()
+    id_iter = itertools.count()    
     def __init__(self, resistance: float) -> None:
         # Sets the resistor's ID
         self.id = next(self.id_iter)

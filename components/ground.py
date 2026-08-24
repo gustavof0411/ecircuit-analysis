@@ -1,8 +1,12 @@
+from components.terminal import Terminal
 from util.node import Node
+import itertools
 
 class Ground:
-    def __init__(self, connectedNode: Node) -> None:
-        self.connectedNode = connectedNode
+    id_iter = itertools.count()
+    def __init__(self) -> None:
+        self.id = next(self.id_iter)
+        self.connectedTerminal = Terminal(self.id, False)
 
-    def getGroundNode(self):
-        return self.connectedNode
+    def connectNodeToBottom(self, node: Node):
+        node.elementB = self.connectedTerminal

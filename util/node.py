@@ -24,22 +24,24 @@ class Node:
     
 
     def printNodeScheme(self):
-        if (self.elementR):
-            if (self.elementR.__class__.__name__ == "Terminal"):
-                print("Right: " + self.elementR.__class__.__name__ + ", ID: " + str(self.elementR.elementID) + ", isPositive: " + str(self.elementR.isPositive))
-            else:
-                print("Right: " + self.elementR.__class__.__name__)
-        else:
-            print("Right: " + self.elementR.__class__.__name__)
 
-        print("Top: " + self.elementT.__class__.__name__)
+        if self.elementR is not None:
+            print("Right of Node " + str(self.id) + ": " + str(self.elementR.id))
 
-        print("Left: " + self.elementL.__class__.__name__)
 
-        print("Bottom: " + self.elementB.__class__.__name__)
+        if self.elementT is not None:
+            print("Top of Node " + str(self.id) + ": " + str(self.elementT.id))
 
-    def printSelfID(self):
-        print(self.id)
+
+        if self.elementL is not None:
+            print("Left of Node " + str(self.id) + ": " + str(self.elementL.id))
+
+
+        if self.elementB is not None:
+            print("Bottom of Node " + str(self.id) + ": " + str(self.elementB.id))
+
+    def getID(self):
+        return self.id
 
     def getElementID(self, element):
         if (element):
