@@ -6,4 +6,4 @@ class Current:
         self.voltage = voltage
 
     def showCurrent(self):
-        print(self.voltage.getVoltage() / self.resistance.getResistance())
+        print(self.voltage.getVoltage().voltage / self.resistance.getResistance())
