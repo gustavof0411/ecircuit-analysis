@@ -1,9 +1,11 @@
 class Terminal:
-    def __init__(self, elementID, isPositive: bool, connectedNodeID) -> None:
-        self.id = elementID
-        self.elementType = elementID.__class__.__name__
-        self.connectedNodeID = connectedNodeID
+    def __init__(self, connectedElement, isPositive: bool) -> None:
+        self.connectedElement = connectedElement
         self.isPositive = isPositive
 
-    def getConnectedNodeID(self):
-        return self.connectedNodeID
+    def getConnectedElement(self):
+        return self.connectedElement
+
+    def getConnectedElementDescription(self):
+        return self.connectedElement.__class__.__name__ + str(self.connectedElement.id)
+        

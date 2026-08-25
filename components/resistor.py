@@ -11,11 +11,8 @@ class Resistor:
         Resistor.currentID += 1
 
         self.resistance = resistance
-        self.posTerminal = Terminal(self, True, None)
-        self.negTerminal = Terminal(self, False, None)
-
-    def addItem(self):
-        self.currentID += 1
+        self.posTerminal = Terminal(self, True)
+        self.negTerminal = Terminal(self, False)
 
     def getResistance(self):
         return self.resistance
@@ -26,29 +23,27 @@ class Resistor:
     def getNegTerminal(self):
         return self.negTerminal
 
-    def connectPosTerminal(self, node: Node, position: str):
-        self.posTerminal.connectedNodeID = node.id
+    def connectPosTerminal(self, node, position: str):
         if (position == "r"):
-            node.elementR = self.negTerminal
+            node.getElements()[0] = self.posTerminal
         elif (position == "t"):
-            node.elementT = self.negTerminal
+            node.getElements()[1] = self.posTerminal
         elif (position == "l"):
-            node.elementL = self.negTerminal
+            node.getElements()[2] = self.posTerminal
         elif (position == "b"):
-            node.elementB = self.negTerminal
+            node.getElements()[3] = self.posTerminal
         else:
             print('error while connecting pos terminal')
 
-    def connectNegTerminal(self, node: Node, position: str):
-        self.negTerminal.connectedNodeID = node.id
+    def connectNegTerminal(self, node, position: str):
         if (position == "r"):
-            node.elementR = self.negTerminal
+            node.getElements()[0] = self.negTerminal
         elif (position == "t"):
-            node.elementT = self.negTerminal
+            node.getElements()[1] = self.negTerminal
         elif (position == "l"):
-            node.elementL = self.negTerminal
+            node.getElements()[2] = self.negTerminal
         elif (position == "b"):
-            node.elementB = self.negTerminal
+            node.getElements()[3] = self.negTerminal
         else:
             print('error while connecting neg terminal')
 

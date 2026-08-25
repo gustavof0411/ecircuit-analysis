@@ -14,30 +14,30 @@ class Wire:
 
         #self.voltage = voltage
         #self.current = current
-        self.startTerminal = Terminal(self.id, True, None)
-        self.endTerminal = Terminal(self.id, False, None)
+        self.startTerminal = Terminal(self, True)
+        self.endTerminal = Terminal(self, False)
 
-    def connectStartTerminal(self, node: Node, position: str):
+    def connectStartTerminal(self, node, position: str):
         if (position == "r"):
-            node.elementR = self.startTerminal
+            node.getElements()[0] = self.startTerminal
         elif (position == "t"):
-            node.elementT = self.startTerminal
+            node.getElements()[1] = self.startTerminal
         elif (position == "l"):
-            node.elementL = self.startTerminal
+            node.getElements()[2] = self.startTerminal
         elif (position == "b"):
-            node.elementB = self.startTerminal
+            node.getElements()[3] = self.startTerminal
         else:
             print('error while connecting start terminal')
 
-    def connectEndTerminal(self, node: Node, position: str):
+    def connectEndTerminal(self, node, position: str):
         if (position == "r"):
-            node.elementR = self.endTerminal
+            node.getElements()[0] = self.endTerminal
         elif (position == "t"):
-            node.elementT = self.endTerminal
+            node.getElements()[1] = self.endTerminal
         elif (position == "l"):
-            node.elementL = self.endTerminal
+            node.getElements()[2] = self.endTerminal
         elif (position == "b"):
-            node.elementB = self.endTerminal
+            node.getElements()[3] = self.endTerminal
         else:
             print('error while connecting end terminal')
 

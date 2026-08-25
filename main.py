@@ -6,45 +6,45 @@ from util.current import Current
 from util.node import Node
 from util.voltage import Voltage
 
-res1 = Resistor(220)
-res2 = Resistor(330)
+volSource1 = VoltageSource(Voltage(20))
+res1 = Resistor(330)
+
+node0 = Node()
+
+volSource1.connectNegTerminal(node0, "t")
 
 node1 = Node()
+volSource1.connectPosTerminal(node1, "b")
 
-res1.connectNegTerminal(node1, "t")
+res1.connectNegTerminal(node1, "r")
 
 node2 = Node()
-res1.connectPosTerminal(node2, "b")
-
-res2.connectNegTerminal(node2, "r")
-
-node3 = Node()
 wire1 = Wire()
 
-res2.connectPosTerminal(node3, "l")
+res1.connectPosTerminal(node2, "l")
 
-wire1.connectStartTerminal(node3, "b")
+wire1.connectStartTerminal(node2, "b")
 
 
-node4 = Node()
+node3 = Node()
 
-wire1.connectEndTerminal(node4, "t")
-node1.connectElementR(node4)
+wire1.connectEndTerminal(node3, "t")
+
+wire2 = Wire()
+wire2.connectStartTerminal(node3, "l")
+wire2.connectEndTerminal(node0, "r")
 
 ground = Ground()
-ground.connectNodeToBottom(node1)
+ground.connectNodeToBottom(node0)
 
-print("Node 1")
+print("Node 0 -------")
+node0.printNodeScheme()
+
+print("Node 1 ------")
 node1.printNodeScheme()
 
-print("Node 2")
+print("Node 2 ------")
 node2.printNodeScheme()
 
-print("Node 3")
+print("Node 3 ------")
 node3.printNodeScheme()
-
-print("Node 4")
-node4.printNodeScheme()
-
-aaa = Node.getNodeList()[1]
-print("aa")

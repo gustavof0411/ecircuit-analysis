@@ -1,54 +1,41 @@
+from components.terminal import Terminal
+from util.enums import NodeDirection
+
 class Node:
     nodeList = {}
     currentID = 0
 
-    def __init__(self, elementR=None, elementT=None, elementL=None, elementB=None) -> None:
-        self.elementR = elementR
-        self.elementT = elementT
-        self.elementL = elementL
-        self.elementB = elementB
+    def __init__(self) -> None:
+        self.elements: dict[int, Terminal | None] = {
+        0: None,
+        1: None,
+        2: None,
+        3: None,
+        } # anti-clockwise notation: 0 is right, 1 is top, 2 is left, 3 is bottom
         self.id = Node.currentID
         Node.nodeList[Node.currentID] = self
         Node.currentID += 1
 
     def connectElementR(self, elementR):
-        self.elementR = elementR
-
+        self.elements[0] = elementR
+    
     def connectElementT(self, elementT):
-        self.elementT = elementT
+        self.elements[1] = elementT
 
     def connectElementL(self, elementL):
-        self.elementL = elementL
+        self.elements[2] = elementL
 
     def connectElementB(self, elementB):
-        self.elementB = elementB
-    
+        self.elements[3] = elementB
 
     def printNodeScheme(self):
+        for i in range(4):
+            element = self.elements[i]
+            if element is not None:
+                print(f"Node {self.id} {NodeDirection(i).name}: {element.getConnectedElementDescription()}")
 
-        if self.elementR is not None:
-            print("Right of Node " + str(self.id) + ": " + self.elementR.__class__.__name__ + str(self.elementR.id))
-
-
-        if self.elementT is not None:
-            print("Top of Node " + str(self.id) + ": " + self.elementT.__class__.__name__ + str(self.elementT.id))
-
-
-        if self.elementL is not None:
-            print("Left of Node " + str(self.id) + ": "+ self.elementL.__class__.__name__ + str(self.elementL.id))
-
-
-        if self.elementB is not None:
-            print("Bottom of Node " + str(self.id) + ": " + self.elementB.__class__.__name__ + str(self.elementB.id))
-
-    def getID(self):
-        return self.id
-
-    def getElementID(self, element):
-        if (element):
-            print("Class: " + element.__class__.__name__ + ", ID: " + str(element.id))
-        else:
-            print("element is None")
+    def getElements(self):
+        return self.elements
 
     @staticmethod
     def getNodeList():

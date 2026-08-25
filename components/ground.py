@@ -8,7 +8,7 @@ class Ground:
         self.id = Ground.currentID
         Ground.groundList[Ground.currentID] = self
         Ground.currentID += 1
-        self.connectedTerminal = Terminal(self.id, False, None)
+        self.connectedTerminal = Terminal(self, False)
 
-    def connectNodeToBottom(self, node: Node):
-        node.elementB = self.connectedTerminal
+    def connectNodeToBottom(self, node):
+        node.getElements()[3] = self.connectedTerminal
