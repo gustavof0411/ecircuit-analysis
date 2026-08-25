@@ -45,3 +45,6 @@ node3.printNodeScheme()
 
 print("Node 4")
 node4.printNodeScheme()
+
+aaa = Node.getNodeList()[1]
+print("aa")

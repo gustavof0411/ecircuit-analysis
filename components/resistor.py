@@ -1,17 +1,21 @@
 from components.terminal import Terminal
 from util.node import Node
-import itertools
+
 
 class Resistor:
-    id_iter = itertools.count()    
+    resList = {}
+    currentID = 0
     def __init__(self, resistance: float) -> None:
-        # Sets the resistor's ID
-        self.id = next(self.id_iter)
+        self.id = Resistor.currentID
+        Resistor.resList[Resistor.currentID] = self
+        Resistor.currentID += 1
 
         self.resistance = resistance
-        self.posTerminal = Terminal(self.id, True)
-        self.negTerminal = Terminal(self.id, False)
+        self.posTerminal = Terminal(self, True, None)
+        self.negTerminal = Terminal(self, False, None)
 
+    def addItem(self):
+        self.currentID += 1
 
     def getResistance(self):
         return self.resistance
@@ -23,6 +27,7 @@ class Resistor:
         return self.negTerminal
 
     def connectPosTerminal(self, node: Node, position: str):
+        self.posTerminal.connectedNodeID = node.id
         if (position == "r"):
             node.elementR = self.negTerminal
         elif (position == "t"):
@@ -35,6 +40,7 @@ class Resistor:
             print('error while connecting pos terminal')
 
     def connectNegTerminal(self, node: Node, position: str):
+        self.negTerminal.connectedNodeID = node.id
         if (position == "r"):
             node.elementR = self.negTerminal
         elif (position == "t"):
@@ -46,3 +52,6 @@ class Resistor:
         else:
             print('error while connecting neg terminal')
 
+    @staticmethod
+    def getResistorByID(id: int):
+        return Resistor.resList[id]

@@ -2,17 +2,20 @@ from components.terminal import Terminal
 from util.current import Current
 from util.node import Node
 from util.voltage import Voltage
-import itertools
 
 class Wire:
-    id_iter = itertools.count()
+    wireList = {}
+    currentID = 0
     def __init__(self) -> None:
         # Sets the wire's ID
-        self.id = next(self.id_iter)
+        self.id = Wire.currentID
+        Wire.wireList[Wire.currentID] = self
+        Wire.currentID += 1
+
         #self.voltage = voltage
         #self.current = current
-        self.startTerminal = Terminal(self.id, True)
-        self.endTerminal = Terminal(self.id, False)
+        self.startTerminal = Terminal(self.id, True, None)
+        self.endTerminal = Terminal(self.id, False, None)
 
     def connectStartTerminal(self, node: Node, position: str):
         if (position == "r"):
@@ -37,4 +40,8 @@ class Wire:
             node.elementB = self.endTerminal
         else:
             print('error while connecting end terminal')
+
+    @staticmethod
+    def getWireList():
+        return Wire.wireList
 

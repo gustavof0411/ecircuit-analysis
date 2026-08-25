@@ -1,14 +1,15 @@
-import itertools
-
 class Node:
-    id_iter = itertools.count()
+    nodeList = {}
+    currentID = 0
 
     def __init__(self, elementR=None, elementT=None, elementL=None, elementB=None) -> None:
         self.elementR = elementR
         self.elementT = elementT
         self.elementL = elementL
         self.elementB = elementB
-        self.id = next(self.id_iter)
+        self.id = Node.currentID
+        Node.nodeList[Node.currentID] = self
+        Node.currentID += 1
 
     def connectElementR(self, elementR):
         self.elementR = elementR
@@ -26,19 +27,19 @@ class Node:
     def printNodeScheme(self):
 
         if self.elementR is not None:
-            print("Right of Node " + str(self.id) + ": " + str(self.elementR.id))
+            print("Right of Node " + str(self.id) + ": " + self.elementR.__class__.__name__ + str(self.elementR.id))
 
 
         if self.elementT is not None:
-            print("Top of Node " + str(self.id) + ": " + str(self.elementT.id))
+            print("Top of Node " + str(self.id) + ": " + self.elementT.__class__.__name__ + str(self.elementT.id))
 
 
         if self.elementL is not None:
-            print("Left of Node " + str(self.id) + ": " + str(self.elementL.id))
+            print("Left of Node " + str(self.id) + ": "+ self.elementL.__class__.__name__ + str(self.elementL.id))
 
 
         if self.elementB is not None:
-            print("Bottom of Node " + str(self.id) + ": " + str(self.elementB.id))
+            print("Bottom of Node " + str(self.id) + ": " + self.elementB.__class__.__name__ + str(self.elementB.id))
 
     def getID(self):
         return self.id
@@ -48,3 +49,7 @@ class Node:
             print("Class: " + element.__class__.__name__ + ", ID: " + str(element.id))
         else:
             print("element is None")
+
+    @staticmethod
+    def getNodeList():
+        return Node.nodeList
