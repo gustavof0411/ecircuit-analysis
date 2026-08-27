@@ -1,6 +1,4 @@
-from components.terminal import Terminal
 from util.current import Current
-from util.node import Node
 from util.voltage import Voltage
 
 class Wire:
@@ -15,10 +13,6 @@ class Wire:
 
         #self.voltage = voltage
         #self.current = current
-        self.terminals:  dict[int, Terminal | None] = {
-            0: None,
-            1: None
-        }
 
     @staticmethod
     def getWireList():

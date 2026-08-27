@@ -13,14 +13,18 @@ class Element:
 
 
     def connectTerminalPolarity(self, node: Node, position: NodeDirection, polarity: bool = False):
-            terminal = Terminal(self.element, node.id)
+            terminal = Terminal(self, node.id)
             if self.element.hasPolarity:
-                self.element.terminals[0] = terminal
-                node.getElements()[position.value] = self.element.terminals[0]
+                self.terminals[0] = terminal
+                node.getElements()[position.value] = self.terminals[0]
             else:
-                self.element.terminals[1] = terminal
-                node.getElements()[position.value] = self.element.terminals[1]
+                self.terminals[1] = terminal
+                node.getElements()[position.value] = self.terminals[1]
 
+    def getOppositeTerminal(self, terminal: Terminal):
+        if (self.terminals[0] == terminal):
+            return self.terminals[1]
+        return terminal
 
     def elementHasPolarity(self):
         return type(self.element) is VoltageSource

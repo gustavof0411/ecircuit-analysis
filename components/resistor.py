@@ -1,7 +1,3 @@
-from components.terminal import Terminal
-from util.node import Node
-
-
 class Resistor:
     resList = {}
     currentID = 0
@@ -12,11 +8,6 @@ class Resistor:
 
         self.hasPolarity = True
         self.resistance = resistance
-        # terminal 0 is positive, terminal 1 is negative
-        self.terminals:  dict[int, Terminal | None] = {
-            0: None,
-            1: None
-        }
 
     def getResistance(self):
         return self.resistance

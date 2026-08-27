@@ -7,5 +7,5 @@ class Terminal:
         return self.connectedElement
 
     def getConnectedElementDescription(self):
-        return self.connectedElement.__class__.__name__ + str(self.connectedElement.id)
+        return self.connectedElement.element.__class__.__name__ + str(self.connectedElement.element.id)
         

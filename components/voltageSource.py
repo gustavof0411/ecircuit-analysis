@@ -1,4 +1,3 @@
-from components.terminal import Terminal
 from util.voltage import Voltage
 
 class VoltageSource:
@@ -10,11 +9,6 @@ class VoltageSource:
         VoltageSource.currentID += 1
         self.voltage = voltage
         self.hasPolarity = True
-        # terminal 0 is positive, terminal 1 is negative
-        self.terminals:  dict[int, Terminal | None] = {
-            0: None,
-            1: None
-        }
 
     def getVoltage(self):
         return self.voltage

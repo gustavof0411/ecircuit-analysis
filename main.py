@@ -44,23 +44,4 @@ node2.printNodeScheme()
 
 node3.printNodeScheme()
 
-'''
-def checkClosedLoop(startNode: Node):
-    startNodeID = startNode.id
-    nextNodeID=-1
-    # There is components to the right
-    if startNode.elements[0]:
-        if (startNode.elements[0].isPositive):
-            nextNodeID = startNode.elements[0].connectedElement.negTerminal.connectedElement.id
-            checkClosedLoop(startNode.elements[0].connectedElement.negTerminal.connectedElement)
-        else:
-            nextNodeID = startNode.elements[0].connectedElement.posTerminal.connectedElement.id
-            checkClosedLoop(startNode.elements[0].connectedElement.posTerminal.)
 
-    if startNode == nextNodeID and nextNodeID > -1:
-        print("yes")
-
-
-
-checkClosedLoop(node1)
-'''
