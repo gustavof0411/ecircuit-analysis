@@ -1,5 +1,4 @@
 from components.terminal import Terminal
-from util.node import Node
 
 class Ground:
     groundList = {}
@@ -8,7 +7,8 @@ class Ground:
         self.id = Ground.currentID
         Ground.groundList[Ground.currentID] = self
         Ground.currentID += 1
-        self.connectedTerminal = Terminal(self, False)
-
-    def connectNodeToBottom(self, node):
-        node.getElements()[3] = self.connectedTerminal
+        # terminal 0 is positive, terminal 1 is negative
+        self.terminals:  dict[int, Terminal | None] = {
+            0: None
+        }
+        self.hasPolarity = True

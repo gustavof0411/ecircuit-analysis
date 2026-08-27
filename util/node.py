@@ -15,7 +15,7 @@ class Node:
         self.id = Node.currentID
         Node.nodeList[Node.currentID] = self
         Node.currentID += 1
-
+    '''
     def connectElementR(self, elementR):
         self.elements[0] = elementR
     
@@ -27,12 +27,14 @@ class Node:
 
     def connectElementB(self, elementB):
         self.elements[3] = elementB
+    '''
 
     def printNodeScheme(self):
         for i in range(4):
             element = self.elements[i]
-            if element is not None:
-                print(f"Node {self.id} {NodeDirection(i).name}: {element.getConnectedElementDescription()}")
+            if element:
+                print(f"Node {self.id} {NodeDirection(i).name}: {element.getConnectedElementDescription()}"
+                )
 
     def getElements(self):
         return self.elements

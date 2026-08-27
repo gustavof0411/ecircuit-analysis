@@ -5,46 +5,62 @@ from components.wire import Wire
 from util.current import Current
 from util.node import Node
 from util.voltage import Voltage
+from util.enums import NodeDirection as nd
+from components.element import Element
 
-volSource1 = VoltageSource(Voltage(20))
-res1 = Resistor(330)
-
-node0 = Node()
-
-volSource1.connectNegTerminal(node0, "t")
-
-node1 = Node()
-volSource1.connectPosTerminal(node1, "b")
-
-res1.connectNegTerminal(node1, "r")
-
-node2 = Node()
+volSource0 = VoltageSource(Voltage(20))
+res0 = Resistor(330)
+wire0 = Wire()
 wire1 = Wire()
 
-res1.connectPosTerminal(node2, "l")
-
-wire1.connectStartTerminal(node2, "b")
-
-
+node0 = Node()
+node1 = Node()
+node2 = Node()
 node3 = Node()
 
-wire1.connectEndTerminal(node3, "t")
-
-wire2 = Wire()
-wire2.connectStartTerminal(node3, "l")
-wire2.connectEndTerminal(node0, "r")
-
 ground = Ground()
-ground.connectNodeToBottom(node0)
 
-print("Node 0 -------")
+elementVolSource =  Element(volSource0)
+elementRes = Element(res0)
+elementWire0 = Element(wire0)
+elementWire1 = Element(wire1)
+elementGround = Element(ground)
+
+elementVolSource.connectTerminalPolarity(node0, nd.TOP, False)
+elementVolSource.connectTerminalPolarity(node1, nd.BOTTOM, True)
+elementRes.connectTerminalPolarity(node1, nd.RIGHT, True)
+elementRes.connectTerminalPolarity(node2, nd.LEFT, False)
+elementWire0.connectTerminalPolarity(node2, nd.BOTTOM, True)
+elementWire0.connectTerminalPolarity(node3, nd.TOP, False)
+elementWire1.connectTerminalPolarity(node3, nd.RIGHT, False)
+elementWire1.connectTerminalPolarity(node0, nd.LEFT, False)
+elementGround.connectTerminalPolarity(node0, nd.BOTTOM)
+
 node0.printNodeScheme()
 
-print("Node 1 ------")
 node1.printNodeScheme()
 
-print("Node 2 ------")
 node2.printNodeScheme()
 
-print("Node 3 ------")
 node3.printNodeScheme()
+
+'''
+def checkClosedLoop(startNode: Node):
+    startNodeID = startNode.id
+    nextNodeID=-1
+    # There is components to the right
+    if startNode.elements[0]:
+        if (startNode.elements[0].isPositive):
+            nextNodeID = startNode.elements[0].connectedElement.negTerminal.connectedElement.id
+            checkClosedLoop(startNode.elements[0].connectedElement.negTerminal.connectedElement)
+        else:
+            nextNodeID = startNode.elements[0].connectedElement.posTerminal.connectedElement.id
+            checkClosedLoop(startNode.elements[0].connectedElement.posTerminal.)
+
+    if startNode == nextNodeID and nextNodeID > -1:
+        print("yes")
+
+
+
+checkClosedLoop(node1)
+'''

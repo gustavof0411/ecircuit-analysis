@@ -1,7 +1,7 @@
 class Terminal:
-    def __init__(self, connectedElement, isPositive: bool) -> None:
+    def __init__(self, connectedElement, nodeID: int) -> None:
         self.connectedElement = connectedElement
-        self.isPositive = isPositive
+        self.connectedNodeID = nodeID
 
     def getConnectedElement(self):
         return self.connectedElement
