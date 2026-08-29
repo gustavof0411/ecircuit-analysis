@@ -1,3 +1,4 @@
+from components.ground import Ground
 from components.terminal import Terminal
 from util.enums import NodeDirection
 
@@ -33,8 +34,14 @@ class Node:
         for i in range(4):
             element = self.elements[i]
             if element:
-                print(f"Node {self.id} {NodeDirection(i).name}: {element.getConnectedElementDescription()}"
-                )
+                if type(element.connectedElement.element) is not Ground:
+                    if element == element.connectedElement.terminals[0]:
+                        print(f"Node {self.id} {NodeDirection(i).name}: +{element.getConnectedElementDescription()}")
+                    else:
+                        print(f"Node {self.id} {NodeDirection(i).name}: -{element.getConnectedElementDescription()}")
+                else:
+                    print(f"Node {self.id} {NodeDirection(i).name}: {element.getConnectedElementDescription()}")
+
 
     def getElements(self):
         return self.elements
