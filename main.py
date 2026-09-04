@@ -96,7 +96,7 @@ def checkClosedLoop(node: Node, analysedNodeID: int | None = None, previousDirec
                                 print(f'Comparing node ${analysedNodeID}, current is {node.id}, going top, next node ID is ${nextNodeID}')
                                 checkClosedLoop(nextNode, analysedNodeID, nd.TOP)
                             elif not elementTerminalRight:
-                                print(f"rightmost bottom corner element (node ${node.id}), can't start analysis here...")
+                                print(f"right corner element (node ${node.id}), can't start analysis here...")
                             else:
                                 print(f"Starting new loop analysis at node ${node.id}")
                                 print(f'Comparing node ${node.id}, current is {node.id}, going top, next node ID is ${nextNodeID}')
@@ -115,7 +115,7 @@ def checkClosedLoop(node: Node, analysedNodeID: int | None = None, previousDirec
             if elementTerminalRight:
                 if (previousDirection != nd.LEFT):
                     if not elementTerminalTop:
-                        #if (type(elementTerminalRight.connectedElement.terminals) is not Ground and len(elementTerminalRight.connectedElement.terminals) > 1):
+                        if (type(elementTerminalRight.connectedElement.terminals) is not Ground and len(elementTerminalRight.connectedElement.terminals) > 1):
                             #print(f'Currently on node ${node.id}, going to element ${elementTerminalRight.getConnectedElementDescription()}')
                     
                             oppositeTerminal = elementTerminalRight.connectedElement.getOppositeTerminal(elementTerminalRight)
@@ -128,7 +128,7 @@ def checkClosedLoop(node: Node, analysedNodeID: int | None = None, previousDirec
                                     print(f'Comparing node ${analysedNodeID}, current is {node.id}, going right, next node ID is ${nextNodeID}')
                                     checkClosedLoop(nextNode, analysedNodeID, nd.RIGHT)
                                 else:
-                                    print(f"Searching for next node... current is ${node.id}, going right, next is ${nextNodeID}")
+                                    print(f"Searching for the next node with a top element... current is ${node.id}, going right, next is ${nextNodeID}")
                                     #print(f"Starting new loop analysis at node ${node.id}")
                                     #print(f'Comparing node ${node.id}, current is {node.id}, going right, next node ID is ${nextNodeID}')
                                     checkClosedLoop(nextNode)
@@ -154,11 +154,9 @@ def checkClosedLoop(node: Node, analysedNodeID: int | None = None, previousDirec
 
             if elementTerminalLeft:
                 if (previousDirection != nd.RIGHT and previousDirection != nd.TOP):
-                        #if (not elementTerminalRight): # goes to the left only if there is no elements to the right
 
                             if (type(elementTerminalLeft.connectedElement.terminals) is not Ground and len(elementTerminalLeft.connectedElement.terminals) > 1):
-                                #print(f'Currently on node ${node.id}, going to element ${elementTerminalLeft.getConnectedElementDescription()}')
-                        
+            
                                 oppositeTerminal = elementTerminalLeft.connectedElement.getOppositeTerminal(elementTerminalLeft)
                                 if oppositeTerminal:
                                     nextNode = Node.getNodeList()[oppositeTerminal.connectedNodeID]
@@ -175,4 +173,4 @@ def checkClosedLoop(node: Node, analysedNodeID: int | None = None, previousDirec
                                         checkClosedLoop(nextNode)
 
 
-checkClosedLoop(node5)
+checkClosedLoop(node4)
